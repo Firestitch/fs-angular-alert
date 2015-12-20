@@ -1,0 +1,21 @@
+<h1><code ng:non-bindable="">prettytime</code>
+<div><span class="hint">filter in module <code ng:non-bindable="">app</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="app-filter-page app-filter-prettytime-page"><p>Converts time to a readable format. ie: Duration 6566533 = 7 days</p>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage"><h3 id="usage_in-html-template-binding">In HTML Template Binding</h3>
+<div class="in-html-template-binding"><code ng:non-bindable=""><span>{{</span> prettytime_expression | prettytime[:abr][:suffix][:input] <span>}}</span></code>
+</div>
+<h3 id="usage_in-javascript">In JavaScript</h3>
+<div class="in-javascript"><code ng:non-bindable="">$filter('prettytime')([round][, abr][, suffix][, input])</code>
+</div>
+<h4 id="usage_in-javascript_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>round <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-bool">bool</a></td><td><div class="app-filter-page app-filter-prettytime-page"><p>Rounds the pretty time. ie: 5d 12h (not rounded) 5d (rounded)</p>
+</div> <p><em>(default: true)</em></p></td></tr><tr><td>abr <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-bool">bool</a></td><td><div class="app-filter-page app-filter-prettytime-page"><p>Abbriviate the units of measurement. ie: 5d (abbreviated) 5 days (not abbreviated)</p>
+</div> <p><em>(default: true)</em></p></td></tr><tr><td>suffix <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-bool">bool</a></td><td><div class="app-filter-page app-filter-prettytime-page"><p>add the word &#39;ago&#39; or &#39;from now&#39; to the end of the pretty string</p>
+</div> <p><em>(default: false)</em></p></td></tr><tr><td>input <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="app-filter-page app-filter-prettytime-page"><p>Specifies if the value is a date/timestamp (time) or the duration in seconds (duration).</p>
+</div> <p><em>(default: time)</em></p></td></tr></tbody></table></div>
+</div>
