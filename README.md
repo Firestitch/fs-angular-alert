@@ -1,1 +1,1 @@
-http://firestitch.github.io/fs-angular-prettytime/#/api
+http://firestitch.github.io/fs-angular-alert
