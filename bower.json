@@ -3,7 +3,7 @@
   "description": "",
   "main": [
     "dist/alert.js",
-    "dist/alert.scss"
+    "dist/_alert.scss"
   ],
   "authors": [
     "Firestitch Inc."

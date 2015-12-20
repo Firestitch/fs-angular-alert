@@ -282,7 +282,7 @@ module.exports = function(grunt) {
                                 cwd: '<%= yeoman.app %>/styles/directives',
                                 src: ["*.scss"],
                                 rename: function(dest, src) {
-                                    return dest + src.replace(/_directive\.scss/, "alert.scss");
+                                    return dest + src.replace(/_directive\.scss/, "_alert.scss");
                                 },
                                 dest: '../dist/'
                             }
