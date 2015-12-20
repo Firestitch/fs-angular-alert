@@ -2,7 +2,8 @@
   "name": "fs-angular-alert",
   "description": "",
   "main": [
-    "dist/alert.js"
+    "dist/alert.js",
+    "dist/alert.scss"
   ],
   "authors": [
     "Firestitch Inc."

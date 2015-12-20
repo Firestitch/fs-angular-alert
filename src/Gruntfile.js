@@ -279,9 +279,12 @@ module.exports = function(grunt) {
                         files: [{
                                 expand: true,
                                 dot: true,
-                                cwd: 'app/styles/directives',
-                                src: [],
-                                dest: '../dist'
+                                cwd: '<%= yeoman.app %>/styles/directives',
+                                src: ["*.scss"],
+                                rename: function(dest, src) {
+                                    return dest + src.replace(/_directive\.scss/, "alert.scss");
+                                },
+                                dest: '../dist/'
                             }
                         ]
                     }
@@ -326,7 +329,7 @@ module.exports = function(grunt) {
                   options: {
                     dest: '../../gh-pages',
                     html5Mode: false,
-                    startPage: '/#/api',
+                    startPage: '/api',
                     title: "Documentation",
                     titleLink: "/",
                     bestMatch: true,
