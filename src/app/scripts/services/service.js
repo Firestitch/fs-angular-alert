@@ -37,8 +37,8 @@
         function add(type, msg, options) {
            
             var options = options || {};
-            options.clear = options===undefined ? true : options.clear;
-            options.timeout = options===undefined ? 10 : options.timeout;
+            options.clear = options.clear===undefined ? true : options.clear;
+            options.timeout = options.timeout===undefined ? 10 : options.timeout;
 
             if(options.clear)
                 clear();

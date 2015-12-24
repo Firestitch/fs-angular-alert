@@ -1,32 +1,32 @@
 (function () {
-    'use strict';
-    
-	angular.module('fs-angular-alert',[]);
+    'use strict';
+    
+	angular.module('fs-angular-alert',[]);
 
 
-})();
+})();
 
-(function () {
-    'use strict';
+(function () {
+    'use strict';
 
-    angular.module('fs-angular-alert')
-    .directive('alert', function (fsAlert) {
-        return {
-            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
-            restrict: 'E',
-            replace: true,
-            link: function ($scope, attrs) {
+    angular.module('fs-angular-alert')
+    .directive('alert', function (fsAlert) {
+        return {
+            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
+            restrict: 'E',
+            replace: true,
+            link: function ($scope, attrs) {
 
-                $scope.alerts = [];
-                $scope.$watch(fsAlert.get,function (alerts) {
-                     $scope.alerts = alerts;
-                });
-            }
-        };
-    });
-})();
+                $scope.alerts = [];
+                $scope.$watch(fsAlert.get,function (alerts) {
+                     $scope.alerts = alerts;
+                });
+            }
+        };
+    });
+})();
 
-(function () {
+(function () {
     'use strict';
 
     /**
@@ -65,8 +65,8 @@
         function add(type, msg, options) {
            
             var options = options || {};
-            options.clear = options===undefined ? true : options.clear;
-            options.timeout = options===undefined ? 10 : options.timeout;
+            options.clear = options.clear===undefined ? true : options.clear;
+            options.timeout = options.timeout===undefined ? 10 : options.timeout;
 
             if(options.clear)
                 clear();
@@ -157,12 +157,13 @@
         }
     });
 })();
+
+angular.module('fs-angular-alert').run(['$templateCache', function($templateCache) {
+  'use strict';
+
+  $templateCache.put('views/directives/directive.html',
+    ""
+  );
+
+}]);
 
-angular.module('fs-angular-alert').run(['$templateCache', function($templateCache) {
-  'use strict';
-
-  $templateCache.put('views/directives/directive.html',
-    ""
-  );
-
-}]);
