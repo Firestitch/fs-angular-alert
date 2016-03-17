@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                      
                     },
                     build: {
-                      src: ['app/scripts/modules/module.js','app/scripts/filters/filter.js','app/scripts/directives/directive.js','app/scripts/services/service.js','.tmp/directivetemplate.js'],
+                      src: ['app/scripts/services/service.js','app/scripts/filters/filter.js','app/scripts/directives/directive.js','.tmp/directivetemplate.js'],
                       dest: '../dist/alert.js',
                     },
                 },
