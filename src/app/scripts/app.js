@@ -12,7 +12,10 @@ angular
     'mdo-angular-cryptography',
     'fs-angular-alert'
 ])
-.config(function ($routeProvider, $cryptoProvider, $mdThemingProvider, CONFIG) {
+.config(function ($routeProvider, $cryptoProvider, $mdThemingProvider, CONFIG, fsAlertProvider) {
+
+    fsAlertProvider.options({ warning: { mode: 'banner' }});
+
     $routeProvider
     .when('/demo', {
         templateUrl: 'views/demo.html',
