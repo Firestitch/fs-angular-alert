@@ -1,9 +1,23 @@
 'use strict';
 
-
 angular.module('app')
-  .controller('DemoCtrl', function ($scope, DummyService) {
+.controller('DemoCtrl', function ($scope, fsAlert, $timeout) {
 
-    $scope.date = new Date();
+    fsAlert.success("Success message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.info("Info message",{ timeout: 0, clear: false });
+    fsAlert.warning("Warning message",{ timeout: 0, clear: false });
+
+
+
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    fsAlert.error("Error message",{ timeout: 0, clear: false });
+
 });
 

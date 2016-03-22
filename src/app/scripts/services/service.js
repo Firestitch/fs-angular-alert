@@ -8,7 +8,7 @@
 
     angular.module('fs-angular-alert',[])
     .provider('fsAlert', function() {
-
+        var modals = 0;
         var _options = {    success: { mode: 'toast' },
                             warning: { mode: 'toast' },
                             info: { mode: 'info' },
@@ -41,14 +41,21 @@
 
             function modal(type, message, options) {
 
+                if(modals) {
+                    return;
+                }
+
+                modals++;
                 $mdDialog.show(
                     $mdDialog.alert({
                         title: 'Attention',
                         content: message,
                         ok: 'Ok'
                       })
-                );
-
+                )
+                .then(function() {
+                    modals--;
+                });
             }
 
             /**
