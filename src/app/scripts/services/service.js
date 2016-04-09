@@ -18,7 +18,7 @@
             _options = angular.extend(_options,value);
         }
 
-        this.$get = function($timeout, $mdToast, $mdDialog) {
+        this.$get = function($timeout, $mdToast, $mdDialog, $q) {
 
             var service = {
                 success: success,
@@ -41,21 +41,25 @@
 
             function modal(type, message, options) {
 
-                if(modals) {
-                    return;
+                var defer = $q.defer();
+                
+                if(!modals) {
+                   
+                    modals++;
+                    $mdDialog.show(
+                        $mdDialog.alert({
+                            title: 'Attention',
+                            content: message,
+                            ok: 'Ok'
+                          })
+                    )
+                    .then(function() {
+                        modals--;
+                        defer.resolve();
+                    });
                 }
 
-                modals++;
-                $mdDialog.show(
-                    $mdDialog.alert({
-                        title: 'Attention',
-                        content: message,
-                        ok: 'Ok'
-                      })
-                )
-                .then(function() {
-                    modals--;
-                });
+                return defer.promise;
             }
 
             /**
@@ -88,8 +92,7 @@
                 });
 
                 if(options.timeout) {
-                    timer = $timeout(function(){
-                        debugger;
+                    timer = $timeout(function() {
                         clear();
                     }, options.timeout * 1000);            
                 }
@@ -103,11 +106,15 @@
                     toast(type, message, options);
                 
                 } else if(options.mode=='modal') {
-                    modal(type, message, options);
+                    return modal(type, message, options);
                 
                 } else if(options.mode=='banner') {
                     banner(type, message, options);
                 }
+
+                var defer = $q.defer();
+                defer.resolve();
+                return defer.promise;
             }
 
 
@@ -119,7 +126,7 @@
              * @description Displays a success alert
              */
             function success(message, options) {
-                show('success', message, options);
+                return show('success', message, options);
             }
 
             /**
@@ -130,7 +137,7 @@
              * @description Displays a info alert
              */
             function info(message, options) {
-                show('info', message, options);
+                return show('info', message, options);
             }
 
             /**
@@ -141,7 +148,7 @@
              * @description Displays a warning alert
              */
             function warning(message, options) {
-                show('warning', message, options);
+                return show('warning', message, options);
             }
 
             /**
@@ -152,7 +159,7 @@
              * @description Displays a error alert
              */
             function error(message, options) {
-                show('error', message, options);
+                return show('error', message, options);
             }
 
             /**
@@ -172,4 +179,3 @@
         };
     });
 })();
-
