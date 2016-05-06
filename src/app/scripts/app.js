@@ -7,7 +7,8 @@ angular
     'ngMaterial',
     'ngAnimate',
     'ngStorage',
-    'fs-angular-alert'
+    'fs-angular-alert',
+    'fs-angular-modal'
 ])
 .config(function ($routeProvider, $mdThemingProvider, fsAlertProvider) {
 

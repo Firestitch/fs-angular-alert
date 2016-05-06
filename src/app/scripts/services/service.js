@@ -50,7 +50,9 @@
                         $mdDialog.alert({
                             title: 'Attention',
                             content: message,
-                            ok: 'Ok'
+                            ok: 'Ok',
+                            preserveScope: true,
+                            skipHide: true 
                           })
                     )
                     .then(function() {

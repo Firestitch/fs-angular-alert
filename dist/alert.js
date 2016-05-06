@@ -50,7 +50,9 @@
                         $mdDialog.alert({
                             title: 'Attention',
                             content: message,
-                            ok: 'Ok'
+                            ok: 'Ok',
+                            preserveScope: true,
+                            skipHide: true 
                           })
                     )
                     .then(function() {
@@ -180,33 +182,31 @@
     });
 })();
 
+(function () {
+    'use strict';
 
-(function () {
-    'use strict';
+    angular.module('fs-angular-alert')
+    .directive('alert', function (fsAlert) {
+        return {
+            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
+            restrict: 'E',
+            replace: true,
+            link: function ($scope, attrs) {
 
-    angular.module('fs-angular-alert')
-    .directive('alert', function (fsAlert) {
-        return {
-            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
-            restrict: 'E',
-            replace: true,
-            link: function ($scope, attrs) {
+                $scope.alerts = [];
+                $scope.$watch(fsAlert.get,function (alerts) {
+                     $scope.alerts = alerts;
+                });
+            }
+        };
+    });
+})();
 
-                $scope.alerts = [];
-                $scope.$watch(fsAlert.get,function (alerts) {
-                     $scope.alerts = alerts;
-                });
-            }
-        };
-    });
-})();
+angular.module('fs-angular-alert').run(['$templateCache', function($templateCache) {
+  'use strict';
 
-angular.module('fs-angular-alert').run(['$templateCache', function($templateCache) {
-  'use strict';
+  $templateCache.put('views/directives/directive.html',
+    ""
+  );
 
-  $templateCache.put('views/directives/directive.html',
-    ""
-  );
-
-}]);
-
+}]);
