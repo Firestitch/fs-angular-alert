@@ -36,3 +36,32 @@
 	    border-color: #FAEBCC;
 	}
 }
+
+.md-toast-animating {
+	overflow: initial !important;
+}
+
+md-toast.fs-toast {
+	position: fixed;
+
+	md-icon {
+		margin: 0 10px 0 0;
+		color: #fff;
+	}
+
+	&.success .md-toast-content {
+		background-color: #34BD43;
+	}
+
+	&.error .md-toast-content {
+		background-color: #FA7567;
+	}
+
+	&.warning .md-toast-content {
+		background-color: #F2C91B;
+	}
+
+	&.info .md-toast-content {
+		background-color: #29B7FF;
+	}
+}

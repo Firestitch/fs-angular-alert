@@ -11,7 +11,7 @@
         var modals = 0;
         var _options = {    success: { mode: 'toast' },
                             warning: { mode: 'toast' },
-                            info: { mode: 'info' },
+                            info: { mode: 'toast' },
                             error: { mode: 'modal' } };
 
         this.options = function(value) {
@@ -27,7 +27,7 @@
                 warning: warning,
                 toast: toast,
                 clear: clear,
-                get: get                
+                get: get
             },
             alerts = [],
             timeout = 10,
@@ -35,8 +35,16 @@
 
             return service;
 
-            function toast(type, message, options) {                
-                $mdToast.showSimple(message);
+            function toast(type, message, options) {
+                options = options || {};
+
+                if(options.icon) {
+                    message = '<md-icon>' + options.icon + '</md-icon>' + message;
+                }
+
+                options.template = '<md-toast class="md-toast fs-toast ' + type +'"><div class="md-toast-content">' + message + '</div></md-toast>';
+                options.position = options.position || 'bottom left';
+                $mdToast.show(options);
             }
 
             function modal(type, message, options) {
@@ -102,9 +110,21 @@
 
             function show(type, message, options) {
                 
-                var options = angular.merge(_options[type] || {},options || {});
+                var options = angular.merge({}, _options[type] || {},options || {});
 
-                if(options.mode=='toast') {
+                if(!options.icon) {
+                    if(type=='success') {
+                        options.icon = 'done';
+                    } else if(type=='error') {
+                        options.icon = 'report_problem';
+                    } else if(type=='info') {
+                        options.icon = 'info';
+                    } else if(type=='warning') {
+                        options.icon = 'report_problem';
+                    }
+                }
+
+                if(options.mode=='toast') {                    
                     toast(type, message, options);
                 
                 } else if(options.mode=='modal') {
@@ -181,3 +201,4 @@
         };
     });
 })();
+

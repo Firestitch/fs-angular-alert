@@ -3,21 +3,23 @@
 angular.module('app')
 .controller('DemoCtrl', function ($scope, fsAlert, $timeout, fsModal) {
 
-    fsAlert.success("Success message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.info("Info message",{ timeout: 0, clear: false });
-    fsAlert.warning("Warning message",{ timeout: 0, clear: false });
+    fsAlert.success("Success message",{ hideDelay: 3000 });
 
+    $timeout(function() {
+        fsAlert.error('Error message', { mode: 'toast' });
+    },3000);
 
+    $timeout(function() {
+        fsAlert.warning("Warning message");
+    },6000);
 
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
-    fsAlert.error("Error message",{ timeout: 0, clear: false });
+    $timeout(function() {
+        fsAlert.info("Info message");
+    },9000);
+
+    $timeout(function() {
+        fsAlert.error("Error message");
+    },12000);
 
     $scope.modal = function() {
 

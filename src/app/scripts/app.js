@@ -3,32 +3,30 @@
 angular
 .module('app', [
     'config',
-    'ngRoute',
+    'ui.router',
     'ngMaterial',
-    'ngAnimate',
-    'ngStorage',
     'fs-angular-alert',
     'fs-angular-modal'
 ])
-.config(function ($routeProvider, $mdThemingProvider, fsAlertProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
 
-    fsAlertProvider.options({ warning: { mode: 'banner' }});
+    $urlRouterProvider.otherwise('/404');
+    $urlRouterProvider.when('', '/demo');
+    $urlRouterProvider.when('/', '/demo');
 
-    $routeProvider
-    .when('/demo', {
+    $stateProvider
+    .state('demo', {
+        url: '/demo',
         templateUrl: 'views/demo.html',
-        controller: 'DemoCtrl',       
+        controller: 'DemoCtrl'
     })
 
-    .when('/404', {
-        templateUrl: 'views/404.html'
-    })
-    .otherwise({
-        redirectTo: '/demo'
+    .state('404', {
+        templateUrl: 'views/404.html',
+        controller: 'DemoCtrl'
     });
 
 })
-.run(function () {
-
-
+.run(function ($rootScope, BOWER) {
+    $rootScope.app_name = BOWER.name;
 });
