@@ -6,7 +6,7 @@
      * @name fs-angular-alert.services:fsAlert
     */
 
-    angular.module('fs-angular-alert',[])
+    angular.module('fs-angular-alert')
     .provider('fsAlert', function() {
         var modals = 0;
         var _options = {    success: { mode: 'toast' },
