@@ -1,6 +1,6 @@
 {
   "name": "fs-angular-alert",
-  "namespace": "ago",
+  "namespace": "alert",
   "port": "5015",   
   "moduleName": "app",
   "version": "0.0.0",
