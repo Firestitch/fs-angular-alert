@@ -2,8 +2,8 @@
     'use strict';
 
     /**
-     * @ngdoc interface
-     * @name fs-angular-alert.services:fsAlert
+     * @ngdoc service
+     * @name app.services:fsAlert
     */
 
     angular.module('fs-angular-alert')
@@ -75,7 +75,7 @@
             /**
              * @ngdoc method
              * @name add
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} type Specifies the type of message (success, error, info, warning)
              * @param {string} msg Alert message
              * @param {object} options Optional options
@@ -143,7 +143,7 @@
             /**
              * @ngdoc method
              * @name success
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} message Message
              * @description Displays a success alert
              */
@@ -154,7 +154,7 @@
             /**
              * @ngdoc method
              * @name info
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} message Message
              * @description Displays a info alert
              */
@@ -165,7 +165,7 @@
             /**
              * @ngdoc method
              * @name warning
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} message Message
              * @description Displays a warning alert
              */
@@ -176,7 +176,7 @@
             /**
              * @ngdoc method
              * @name error
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} message Message
              * @description Displays a error alert
              */
@@ -187,7 +187,7 @@
             /**
              * @ngdoc method
              * @name clear
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf app.services:fsAlert
              * @param {string} message Message
              * @description Clears any alert messages
              */
