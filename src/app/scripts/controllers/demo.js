@@ -18,7 +18,7 @@
     },9000);
 
     $timeout(function() {
-        fsAlert.error("Error message");
+        fsAlert.error("Error message<br>HTML");
     },12000);
 
     $scope.modal = function() {

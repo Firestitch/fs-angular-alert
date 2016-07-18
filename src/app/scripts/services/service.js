@@ -2,11 +2,11 @@
     'use strict';
 
     /**
-     * @ngdoc service
-     * @name app.services:fsAlert
+     * @ngdoc interface
+     * @name fs-angular-alert.services:fsAlert
     */
 
-    angular.module('fs-angular-alert')
+    angular.module('fs-angular-alert',[])
     .provider('fsAlert', function() {
         var modals = 0;
         var _options = {    success: { mode: 'toast' },
@@ -56,11 +56,28 @@
                     modals++;
                     $mdDialog.show(
                         $mdDialog.alert({
+                            template: ['<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}">',
+                            '<md-dialog-content class="md-dialog-content" tabIndex="-1">',
+                            '   <h2 class="md-title">{{ dialog.title }}</h2>',
+                            message,
+                            '</md-dialog-content>',
+                            '<md-dialog-actions>',
+                            '   <md-button ng-click="dialog.ok($event)" class="md-accent">Ok</md-button>',
+                            '</md-dialog-actions>',
+                            '</md-dialog>'
+                            ].join(''),
                             title: 'Attention',
                             content: message,
+                            clickOutsideToClose: true,
                             ok: 'Ok',
+                            controllerAs: 'dialog',
                             preserveScope: true,
-                            skipHide: true 
+                            skipHide: true,
+                            controller: function () {
+                                this.ok = function() {
+                                    $mdDialog.hide();
+                                }
+                            }
                           })
                     )
                     .then(function() {
@@ -75,7 +92,7 @@
             /**
              * @ngdoc method
              * @name add
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} type Specifies the type of message (success, error, info, warning)
              * @param {string} msg Alert message
              * @param {object} options Optional options
@@ -143,7 +160,7 @@
             /**
              * @ngdoc method
              * @name success
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} message Message
              * @description Displays a success alert
              */
@@ -154,7 +171,7 @@
             /**
              * @ngdoc method
              * @name info
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} message Message
              * @description Displays a info alert
              */
@@ -165,7 +182,7 @@
             /**
              * @ngdoc method
              * @name warning
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} message Message
              * @description Displays a warning alert
              */
@@ -176,7 +193,7 @@
             /**
              * @ngdoc method
              * @name error
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} message Message
              * @description Displays a error alert
              */
@@ -187,7 +204,7 @@
             /**
              * @ngdoc method
              * @name clear
-             * @methodOf app.services:fsAlert
+             * @methodOf fs-angular-alert.services:fsAlert
              * @param {string} message Message
              * @description Clears any alert messages
              */
