@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('fs-angular-alert')
+    angular.module('fs-angular-alert', [])
     .directive('alert', function (fsAlert) {
         return {
             template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
@@ -239,4 +239,4 @@
         };
     });
 })();
-
+
