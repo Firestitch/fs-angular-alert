@@ -3,7 +3,7 @@
 
     /**
      * @ngdoc service
-     * @name services.fsAlert
+     * @name fs.fsAlert
     */
 
     angular.module('fs-angular-alert',[])
@@ -92,7 +92,7 @@
             /**
              * @ngdoc method
              * @name add
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} type Specifies the type of message (success, error, info, warning)
              * @param {string} msg Alert message
              * @param {object} options Optional options
@@ -160,7 +160,7 @@
             /**
              * @ngdoc method
              * @name success
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a success alert
              */
@@ -171,7 +171,7 @@
             /**
              * @ngdoc method
              * @name info
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a info alert
              */
@@ -182,7 +182,7 @@
             /**
              * @ngdoc method
              * @name warning
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a warning alert
              */
@@ -193,7 +193,7 @@
             /**
              * @ngdoc method
              * @name error
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a error alert
              */
@@ -204,7 +204,7 @@
             /**
              * @ngdoc method
              * @name clear
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Clears any alert messages
              */
