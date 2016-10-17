@@ -1,6 +1,65 @@
-<alert></alert>
 
-<br><br><br><br><br>
+<fs-alert fs-message="'fs-alert template directive'"></fs-alert>
+
+<div class="alerts-container">
+	<div class="label">fs-alerts Container</div>
+	<fs-alerts></fs-alerts>
+</div>
+
+<div class="demos">
+	<div class="group">
+		<a href ng-click="success()">Toast Success</a>
+
+		<a href ng-click="warning()">Toast Warning</a>
+
+		<a href ng-click="info()">Toast Info</a>
+	</div>
+
+	<div class="group">
+		<a href ng-click="error()">Modal Error</a>
+
+		<a href ng-click="modal()">Error In a Modal</a>
+	</div>
+
+	<div class="group">
+		<a href ng-click="banner('success')">Banner Success</a>
+
+		<a href ng-click="banner('warning')">Banner Warn</a>
+
+		<a href ng-click="banner('info')">Banner Info</a>
+
+		<a href ng-click="banner('error')">Banner Error</a>
+	</div>
+</div>
 
 
-<a href ng-click="modal()">Open Modal</a>
+<style>
+.demos a {
+	margin-bottom: 20px;
+	display: block;
+}
+
+.demos .group {
+	float: left;
+	margin-right: 50px;
+}
+
+.alerts-container {
+	padding: 20px;
+	border: 3px dashed #ccc;
+	margin: 50px 0;
+	position: relative;
+}
+
+.alerts-container .fs-alert {
+	margin: 0;
+}
+
+.alerts-container .label {
+	position: relative;
+	top: -10px;
+	left: -10px;
+	font-size: 10px;
+}
+
+</style>

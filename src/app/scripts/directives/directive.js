@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('fs-angular-alert', [])
-    .directive('alert', function (fsAlert) {
+    angular.module('fs-angular-alert')
+    .directive('fsAlerts', function(fsAlert) {
         return {
-            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
+            template: '<fs-alert ng-repeat="alert in alerts" fs-type="alert.type" fs-message="alert.msg"></div>',
             restrict: 'E',
             replace: true,
             link: function ($scope, attrs) {
@@ -13,6 +13,26 @@
                 $scope.$watch(fsAlert.get,function (alerts) {
                      $scope.alerts = alerts;
                 });
+            }
+        };
+    })
+    .directive('fsAlert', function () {
+        return {
+            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
+            restrict: 'E',
+            replace: true,
+            scope: {
+                message: '=?fsMessage',
+                type: '=?fsType'
+            },
+            link: function ($scope, attrs) {
+
+                if(!$scope.type) {
+                    $scope.type = 'info';
+                }
+
+                var icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
+                $scope.icon = icons[$scope.type];
             }
         };
     });

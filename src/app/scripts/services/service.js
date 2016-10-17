@@ -27,7 +27,8 @@
                 warning: warning,
                 toast: toast,
                 clear: clear,
-                get: get
+                get: get,
+                show: show
             },
             alerts = [],
             timeout = 10,
@@ -50,9 +51,9 @@
             function modal(type, message, options) {
 
                 var defer = $q.defer();
-                
+
                 if(!modals) {
-                   
+
                     modals++;
                     $mdDialog.show(
                         $mdDialog.alert({
@@ -101,7 +102,7 @@
              * @description Adds an alert message
              */
             function banner(type, msg, options) {
-      
+
                 var options = options || {};
                 options.clear = options.clear===undefined ? true : options.clear;
                 options.timeout = options.timeout===undefined ? 15 : options.timeout;
@@ -121,12 +122,12 @@
                 if(options.timeout) {
                     timer = $timeout(function() {
                         clear();
-                    }, options.timeout * 1000);            
+                    }, options.timeout * 1000);
                 }
             }
 
             function show(type, message, options) {
-                
+
                 var options = angular.merge({}, _options[type] || {},options || {});
 
                 if(!options.icon) {
@@ -141,12 +142,12 @@
                     }
                 }
 
-                if(options.mode=='toast') {                    
+                if(options.mode=='toast') {
                     toast(type, message, options);
-                
+
                 } else if(options.mode=='modal') {
                     return modal(type, message, options);
-                
+
                 } else if(options.mode=='banner') {
                     banner(type, message, options);
                 }

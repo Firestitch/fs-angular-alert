@@ -2,10 +2,10 @@
 (function () {
     'use strict';
 
-    angular.module('fs-angular-alert', [])
-    .directive('alert', function (fsAlert) {
+    angular.module('fs-angular-alert')
+    .directive('fsAlerts', function(fsAlert) {
         return {
-            template: '<div class="alerts"><div ng-repeat="alert in alerts" type="{{alert.type}}" class="alert alert-{{alert.type}}">{{ alert.msg }}</div></div>',
+            template: '<fs-alert ng-repeat="alert in alerts" fs-type="alert.type" fs-message="alert.msg"></div>',
             restrict: 'E',
             replace: true,
             link: function ($scope, attrs) {
@@ -16,6 +16,26 @@
                 });
             }
         };
+    })
+    .directive('fsAlert', function () {
+        return {
+            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
+            restrict: 'E',
+            replace: true,
+            scope: {
+                message: '=?fsMessage',
+                type: '=?fsType'
+            },
+            link: function ($scope, attrs) {
+
+                if(!$scope.type) {
+                    $scope.type = 'info';
+                }
+
+                var icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
+                $scope.icon = icons[$scope.type];
+            }
+        };
     });
 })();
 
@@ -23,8 +43,8 @@
     'use strict';
 
     /**
-     * @ngdoc interface
-     * @name fs-angular-alert.services:fsAlert
+     * @ngdoc service
+     * @name services.fsAlert
     */
 
     angular.module('fs-angular-alert',[])
@@ -48,7 +68,8 @@
                 warning: warning,
                 toast: toast,
                 clear: clear,
-                get: get
+                get: get,
+                show: show
             },
             alerts = [],
             timeout = 10,
@@ -71,9 +92,9 @@
             function modal(type, message, options) {
 
                 var defer = $q.defer();
-                
+
                 if(!modals) {
-                   
+
                     modals++;
                     $mdDialog.show(
                         $mdDialog.alert({
@@ -113,7 +134,7 @@
             /**
              * @ngdoc method
              * @name add
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} type Specifies the type of message (success, error, info, warning)
              * @param {string} msg Alert message
              * @param {object} options Optional options
@@ -122,7 +143,7 @@
              * @description Adds an alert message
              */
             function banner(type, msg, options) {
-      
+
                 var options = options || {};
                 options.clear = options.clear===undefined ? true : options.clear;
                 options.timeout = options.timeout===undefined ? 15 : options.timeout;
@@ -142,12 +163,12 @@
                 if(options.timeout) {
                     timer = $timeout(function() {
                         clear();
-                    }, options.timeout * 1000);            
+                    }, options.timeout * 1000);
                 }
             }
 
             function show(type, message, options) {
-                
+
                 var options = angular.merge({}, _options[type] || {},options || {});
 
                 if(!options.icon) {
@@ -162,12 +183,12 @@
                     }
                 }
 
-                if(options.mode=='toast') {                    
+                if(options.mode=='toast') {
                     toast(type, message, options);
-                
+
                 } else if(options.mode=='modal') {
                     return modal(type, message, options);
-                
+
                 } else if(options.mode=='banner') {
                     banner(type, message, options);
                 }
@@ -181,7 +202,7 @@
             /**
              * @ngdoc method
              * @name success
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} message Message
              * @description Displays a success alert
              */
@@ -192,7 +213,7 @@
             /**
              * @ngdoc method
              * @name info
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} message Message
              * @description Displays a info alert
              */
@@ -203,7 +224,7 @@
             /**
              * @ngdoc method
              * @name warning
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} message Message
              * @description Displays a warning alert
              */
@@ -214,7 +235,7 @@
             /**
              * @ngdoc method
              * @name error
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} message Message
              * @description Displays a error alert
              */
@@ -225,7 +246,7 @@
             /**
              * @ngdoc method
              * @name clear
-             * @methodOf fs-angular-alert.services:fsAlert
+             * @methodOf services.fsAlert
              * @param {string} message Message
              * @description Clears any alert messages
              */
@@ -239,4 +260,4 @@
         };
     });
 })();
-
+
