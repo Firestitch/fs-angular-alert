@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('fs-angular-alert')
+    angular.module('fs-angular-alert',[])
     .directive('fsAlerts', function(fsAlert) {
         return {
             template: '<fs-alert ng-repeat="alert in alerts" fs-type="alert.type" fs-message="alert.msg"></div>',
@@ -44,10 +44,10 @@
 
     /**
      * @ngdoc service
-     * @name services.fsAlert
+     * @name fs.fsAlert
     */
 
-    angular.module('fs-angular-alert',[])
+    angular.module('fs-angular-alert')
     .provider('fsAlert', function() {
         var modals = 0;
         var _options = {    success: { mode: 'toast' },
@@ -134,7 +134,7 @@
             /**
              * @ngdoc method
              * @name add
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} type Specifies the type of message (success, error, info, warning)
              * @param {string} msg Alert message
              * @param {object} options Optional options
@@ -202,7 +202,7 @@
             /**
              * @ngdoc method
              * @name success
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a success alert
              */
@@ -213,7 +213,7 @@
             /**
              * @ngdoc method
              * @name info
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a info alert
              */
@@ -224,7 +224,7 @@
             /**
              * @ngdoc method
              * @name warning
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a warning alert
              */
@@ -235,7 +235,7 @@
             /**
              * @ngdoc method
              * @name error
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Displays a error alert
              */
@@ -246,7 +246,7 @@
             /**
              * @ngdoc method
              * @name clear
-             * @methodOf services.fsAlert
+             * @methodOf fs.fsAlert
              * @param {string} message Message
              * @description Clears any alert messages
              */

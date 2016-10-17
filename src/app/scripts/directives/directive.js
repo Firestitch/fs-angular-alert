@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('fs-angular-alert')
+    angular.module('fs-angular-alert',[])
     .directive('fsAlerts', function(fsAlert) {
         return {
             template: '<fs-alert ng-repeat="alert in alerts" fs-type="alert.type" fs-message="alert.msg"></div>',
