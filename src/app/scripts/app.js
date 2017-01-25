@@ -8,7 +8,9 @@ angular
     'fs-angular-alert',
     'fs-angular-modal'
 ])
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, fsAlertProvider) {
+
+	fsAlertProvider.options({ success: { message: 'Saved' }});
 
     $urlRouterProvider.otherwise('/404');
     $urlRouterProvider.when('', '/demo');

@@ -50,13 +50,25 @@
     angular.module('fs-angular-alert')
     .provider('fsAlert', function() {
         var modals = 0;
-        var _options = {    success: { mode: 'toast' },
-                            warning: { mode: 'toast' },
-                            info: { mode: 'toast' },
-                            error: { mode: 'modal' } };
+        var _options = {    success: { 	mode: 'toast',
+        								message: '',
+        								toastHideDelay: 5,
+        								bannerHideDelay: 10 },
+                            warning: { 	mode: 'toast',
+                            			message: '',
+                            			toastHideDelay: 5,
+                            			bannerHideDelay: 10 },
+                            info: { 	mode: 'toast',
+                            			message: '',
+                            			toastHideDelay: 5,
+                            			bannerHideDelay: 10 },
+                            error: { 	mode: 'modal',
+                            			message: '',
+                            			toastHideDelay: 5,
+                            			 bannerHideDelay: 10 } };
 
         this.options = function(value) {
-            _options = angular.extend(_options,value);
+            _options = angular.merge(_options,value);
         }
 
         this.$get = function($timeout, $mdToast, $mdDialog, $q) {
@@ -71,21 +83,26 @@
                 get: get,
                 show: show
             },
-            alerts = [],
-            timeout = 10,
-            timer;
+            alerts = [];
 
             return service;
 
             function toast(type, message, options) {
+
+            	var el = document.querySelector('md-toast.fs-toast.' + type + ' .message');
+
+            	if(el) {
+            		if(angular.element(el).text()==message) {
+            			return;
+            		}
+            	}
+
                 options = options || {};
+                var icon = options.icon ? '<md-icon>' + options.icon + '</md-icon>' : '';
 
-                if(options.icon) {
-                    message = '<md-icon>' + options.icon + '</md-icon>' + message;
-                }
-
-                options.template = '<md-toast class="md-toast fs-toast ' + type +'"><div class="md-toast-content">' + message + '</div></md-toast>';
+                options.template = '<md-toast class="md-toast fs-toast ' + type +'"><div class="md-toast-content">' + icon + '<span class="message">' + message + '</span></div></md-toast>';
                 options.position = options.position || 'bottom left';
+                options.hideDelay = _options[type].toastHideDelay * 1000;
                 $mdToast.show(options);
             }
 
@@ -139,14 +156,12 @@
              * @param {string} msg Alert message
              * @param {object} options Optional options
              * @param {string} [options.clear=true] Clears any previous alerts before displaying the new alert
-             * @param {string} [options.timeout=10] The amount of seconds after displaying an alert to hide the alert
              * @description Adds an alert message
              */
             function banner(type, msg, options) {
 
                 var options = options || {};
                 options.clear = options.clear===undefined ? true : options.clear;
-                options.timeout = options.timeout===undefined ? 15 : options.timeout;
 
                 if(options.clear)
                     clear();
@@ -160,10 +175,11 @@
                     close: clear
                 });
 
-                if(options.timeout) {
-                    timer = $timeout(function() {
+                var timeout = _options[type].bannerHideDelay * 1000;
+                if(timeout) {
+                    $timeout(function() {
                         clear();
-                    }, options.timeout * 1000);
+                    },timeout);
                 }
             }
 
@@ -181,6 +197,10 @@
                     } else if(type=='warning') {
                         options.icon = 'report_problem';
                     }
+                }
+
+                if(!message) {
+                	message = options.message;
                 }
 
                 if(options.mode=='toast') {

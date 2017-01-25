@@ -27,5 +27,8 @@
        fsAlert.show(type, 'Banner message',{ mode: 'banner' });
     }
 
+    $scope.successBlank = function() {
+       fsAlert.success();
+    }
 });
 
