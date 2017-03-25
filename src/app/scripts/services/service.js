@@ -61,7 +61,7 @@
 
                 options.template = '<md-toast class="md-toast fs-toast ' + type +'"><div class="md-toast-content">' + icon + '<span class="message">' + message + '</span></div></md-toast>';
                 options.position = options.position || 'bottom left';
-                options.hideDelay = _options[type].toastHideDelay * 1000;
+                options.hideDelay = (options.hideDelay===undefined ? _options[type].toastHideDelay : options.hideDelay) * 1000;
                 $mdToast.show(options);
             }
 
