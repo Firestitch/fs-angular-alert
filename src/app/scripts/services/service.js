@@ -231,6 +231,7 @@
              */
             function clear() {
                 alerts = [];
+                $mdDialog.hide();
             }
 
             function get() {
