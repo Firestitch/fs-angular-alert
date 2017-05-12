@@ -30,5 +30,9 @@
     $scope.successBlank = function() {
        fsAlert.success();
     }
+
+    $scope.infoModal = function(type) {
+       fsAlert.info('Message...',{ mode: 'modal' });
+    }
 });
 

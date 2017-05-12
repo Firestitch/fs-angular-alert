@@ -55,7 +55,7 @@
 	overflow: initial !important;
 }
 
-md-toast.fs-toast {
+.fs-alert-toast {
 	position: fixed;
 
 	md-icon {
@@ -63,19 +63,25 @@ md-toast.fs-toast {
 		color: #fff;
 	}
 
-	&.success .md-toast-content {
+	&.fs-alert-success .md-toast-content {
 		background-color: #34BD43;
 	}
 
-	&.error .md-toast-content {
+	&.fs-alert-error .md-toast-content {
 		background-color: #FA7567;
 	}
 
-	&.warning .md-toast-content {
+	&.fs-alert-warning .md-toast-content {
 		background-color: #F2C91B;
 	}
 
-	&.info .md-toast-content {
+	&.fs-alert-info .md-toast-content {
 		background-color: #29B7FF;
+	}
+}
+
+.fs-alert-modal {
+	h2 {
+		margin-top: 0;
 	}
 }

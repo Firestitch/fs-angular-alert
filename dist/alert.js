@@ -100,7 +100,7 @@
                 options = options || {};
                 var icon = options.icon ? '<md-icon>' + options.icon + '</md-icon>' : '';
 
-                options.template = '<md-toast class="md-toast fs-toast ' + type +'"><div class="md-toast-content">' + icon + '<span class="message">' + message + '</span></div></md-toast>';
+                options.template = '<md-toast class="md-toast fs-alert-toast fs-alert-' + type +'"><div class="md-toast-content">' + icon + '<span class="message">' + message + '</span></div></md-toast>';
                 options.position = options.position || 'bottom left';
                 options.hideDelay = (options.hideDelay===undefined ? _options[type].toastHideDelay : options.hideDelay) * 1000;
                 $mdToast.show(options);
@@ -115,7 +115,7 @@
                     modals++;
                     $mdDialog.show(
                         $mdDialog.alert({
-                            template: ['<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}">',
+                            template: ['<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}" class="fs-alert-modal fs-alert-' + type + '">',
                             '<md-dialog-content tabIndex="-1">',
                             '	<div class="md-dialog-content">',
                             '   	<h2 class="md-title">{{ dialog.title }}</h2>',
