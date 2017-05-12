@@ -1,4 +1,4 @@
-.fs-alert {
+.fs-alert-banner {
 
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -82,6 +82,37 @@
 
 .fs-alert-modal {
 	h2 {
-		margin-top: 0;
+		margin: 0;
+	}
+
+	.heading {
+		margin-bottom: 15px;
+		md-icon {
+			margin-right: 5px;
+		}
+	}
+
+	&.fs-alert-success {
+	    .heading md-icon {
+	    	color: #34BD43;
+	    }
+	}
+
+	&.fs-alert-error {
+	    .heading md-icon {
+	    	color: #FA7567;
+	    }
+	}
+
+	&.fs-alert-info {
+	    .heading md-icon {
+	    	color: #29B7FF;
+	    }
+	}
+
+	&.fs-alert-warning {
+	    .heading md-icon {
+	    	color: #F2C91B;
+	    }
 	}
 }

@@ -18,7 +18,7 @@
     })
     .directive('fsAlert', function () {
         return {
-            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
+            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert-banner fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
             restrict: 'E',
             replace: true,
             scope: {

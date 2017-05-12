@@ -8,7 +8,7 @@
     }
 
     $scope.error = function() {
-       fsAlert.error('Error message<br>HTML');
+       fsAlert.error('Error message',{ mode: 'toast' });
     }
 
     $scope.warning = function() {
@@ -29,6 +29,18 @@
 
     $scope.successBlank = function() {
        fsAlert.success();
+    }
+
+	$scope.warningModal = function(type) {
+       fsAlert.warning('Message...',{ mode: 'modal' });
+    }
+
+    $scope.successModal = function(type) {
+       fsAlert.success('Message...',{ mode: 'modal' });
+    }
+
+	$scope.errorModal = function(type) {
+       fsAlert.error('Message...',{ mode: 'modal' });
     }
 
     $scope.infoModal = function(type) {

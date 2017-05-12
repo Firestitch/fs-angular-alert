@@ -66,47 +66,54 @@
             }
 
             function modal(type, message, options) {
+            	options = options || {};
 
-                var defer = $q.defer();
+                return $q(function(resolve,reject) {
 
-                if(!modals) {
+	                if(modals) {
+	                	return;
+	                }
 
                     modals++;
                     $mdDialog.show(
                         $mdDialog.alert({
-                            template: ['<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}" class="fs-alert-modal fs-alert-' + type + '">',
+                            template: ['<md-dialog md-theme="default" aria-label="Dialog" class="fs-alert-modal fs-alert-{{type}}">',
                             '<md-dialog-content tabIndex="-1">',
                             '	<div class="md-dialog-content">',
-                            '   	<h2 class="md-title">{{ dialog.title }}</h2>',
-                            		message,
+                            '		<div layout="row" layout-align="start center" class="heading">',
+                            '			<md-icon ng-show="icon">{{icon}}</md-icon>',
+                            ' 		  	<h2 class="md-title" flex>{{title}}</h2>',
+                            '		</div>',
+                            '		<div ng-bind-html="content" class="content"></div>',
                             '	</div>',
                             '</md-dialog-content>',
                             '<md-dialog-actions>',
-                            '   <md-button ng-click="dialog.ok($event)" class="md-accent">Ok</md-button>',
+                            '   <md-button ng-click="ok($event)" class="md-accent">{{okLabel}}</md-button>',
                             '</md-dialog-actions>',
                             '</md-dialog>'
                             ].join(''),
-                            title: 'Attention',
-                            content: message,
                             clickOutsideToClose: true,
-                            ok: 'Ok',
-                            controllerAs: 'dialog',
                             preserveScope: true,
                             skipHide: true,
-                            controller: function () {
-                                this.ok = function() {
+                            controller: ['$scope','$sce',function($scope,$sce) {
+
+                                $scope.content = $sce.trustAsHtml(message);
+                                $scope.title = options.title===undefined ? 'Attention' : options.title;
+                                $scope.okLabel = options.okLabel===undefined ? 'Ok' : options.okLabel;
+                                $scope.type = type;
+                                $scope.icon = options.icon;
+
+                                $scope.ok = function() {
                                     $mdDialog.hide();
                                 }
-                            }
+                            }]
                           })
                     )
                     .then(function() {
                         modals--;
-                        defer.resolve();
+                        resolve();
                     });
-                }
-
-                return defer.promise;
+              	});
             }
 
             /**
@@ -144,20 +151,24 @@
                 }
             }
 
+            function getIconName(type) {
+                if(type=='success') {
+                   return 'done';
+                } else if(type=='error') {
+                    return 'report_problem';
+                } else if(type=='info') {
+                    return 'info';
+                } else if(type=='warning') {
+                    return 'report_problem';
+                }
+            }
+
             function show(type, message, options) {
 
                 var options = angular.merge({}, _options[type] || {},options || {});
 
-                if(!options.icon) {
-                    if(type=='success') {
-                        options.icon = 'done';
-                    } else if(type=='error') {
-                        options.icon = 'report_problem';
-                    } else if(type=='info') {
-                        options.icon = 'info';
-                    } else if(type=='warning') {
-                        options.icon = 'report_problem';
-                    }
+                if(options.icon===undefined) {
+                	options.icon = getIconName(type);
                 }
 
                 if(!message) {
@@ -188,6 +199,8 @@
              * @description Displays a success alert
              */
             function success(message, options) {
+            	options = options || {};
+            	options.title = options.title===undefined ? 'Success' : options.title;
                 return show('success', message, options);
             }
 
@@ -199,6 +212,8 @@
              * @description Displays a info alert
              */
             function info(message, options) {
+            	options = options || {};
+            	options.title = options.title===undefined ? 'Information' : options.title;
                 return show('info', message, options);
             }
 
@@ -210,6 +225,8 @@
              * @description Displays a warning alert
              */
             function warning(message, options) {
+            	options = options || {};
+            	options.title = options.title===undefined ? 'Warning' : options.title;
                 return show('warning', message, options);
             }
 
@@ -221,6 +238,8 @@
              * @description Displays a error alert
              */
             function error(message, options) {
+            	options = options || {};
+            	options.title = options.title===undefined ? 'Attention' : options.title;
                 return show('error', message, options);
             }
 
