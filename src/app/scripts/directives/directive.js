@@ -4,7 +4,7 @@
     angular.module('fs-angular-alert',[])
     .directive('fsAlerts', function(fsAlert) {
         return {
-            template: '<fs-alert ng-repeat="alert in alerts" fs-type="alert.type" fs-message="alert.msg"></div>',
+            template: '<fs-alert ng-repeat="alert in alerts" fs-type="{{alert.type}}" fs-message="{{alert.msg}}"></div>',
             restrict: 'E',
             replace: true,
             link: function ($scope, attrs) {
@@ -22,8 +22,8 @@
             restrict: 'E',
             replace: true,
             scope: {
-                message: '=?fsMessage',
-                type: '=?fsType'
+                message: '@fsMessage',
+                type: '@fsType'
             },
             link: function ($scope, attrs) {
 
