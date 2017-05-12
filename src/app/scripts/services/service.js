@@ -75,9 +75,11 @@
                     $mdDialog.show(
                         $mdDialog.alert({
                             template: ['<md-dialog md-theme="{{ dialog.theme }}" aria-label="{{ dialog.ariaLabel }}">',
-                            '<md-dialog-content class="md-dialog-content" tabIndex="-1">',
-                            '   <h2 class="md-title">{{ dialog.title }}</h2>',
-                            message,
+                            '<md-dialog-content tabIndex="-1">',
+                            '	<div class="md-dialog-content">',
+                            '   	<h2 class="md-title">{{ dialog.title }}</h2>',
+                            		message,
+                            '	</div>',
                             '</md-dialog-content>',
                             '<md-dialog-actions>',
                             '   <md-button ng-click="dialog.ok($event)" class="md-accent">Ok</md-button>',
