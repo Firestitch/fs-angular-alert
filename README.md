@@ -1,1 +1,1 @@
-http://firestitch.github.io/fs-angular-alert
+Demo http://boilerplate.firestitch.com/patterns/alert-modal
