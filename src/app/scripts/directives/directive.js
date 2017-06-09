@@ -16,11 +16,10 @@
             }
         };
     })
-    .directive('fsAlert', function ($interpolate) {
+    .directive('fsAlert', function ($compile) {
         return {
-            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert-banner fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
+            template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert-banner fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div ng-if="!message" ng-transclude></div><div ng-if="message">{{message}}</div>',
             restrict: 'E',
-            replace: true,
             transclude: true,
             scope: {
                 message: '@fsMessage',
@@ -33,13 +32,6 @@
 	                if(!$scope.type) {
 	                    $scope.type = 'info';
 	                }
-
-	                $transclude($scope, function(clone) {
-	                	var html = angular.element(clone).html();
-	                	if(html) {
-	                		$scope.message = $interpolate(html)($scope.$parent);
-	                	}
-              		});
 
 	                var icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
 	                $scope.icon = icons[$scope.type];
