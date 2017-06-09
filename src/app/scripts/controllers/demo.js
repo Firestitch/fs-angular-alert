@@ -3,6 +3,8 @@
 angular.module('app')
 .controller('DemoCtrl', function ($scope, fsAlert, $timeout, fsModal) {
 
+
+	$scope.test = 'testing';
     $scope.modal = function() {
         fsModal.show('ModalCtrl','views/modal.html');
     }

@@ -12,29 +12,40 @@
 
                 $scope.alerts = [];
                 $scope.$watch(fsAlert.get,function (alerts) {
-                     $scope.alerts = alerts;
+                    $scope.alerts = alerts;
                 });
             }
         };
     })
-    .directive('fsAlert', function () {
+    .directive('fsAlert', function ($interpolate) {
         return {
             template: '<div layout="row" layout-align="start center" type="{{type}}" class="fs-alert-banner fs-alert-{{type}}"><div><md-icon ng-show="icon">{{icon}}</md-icon></div><div>{{message}}</div></div>',
             restrict: 'E',
             replace: true,
+            transclude: true,
             scope: {
                 message: '@fsMessage',
                 type: '@fsType'
             },
-            link: function ($scope, attrs) {
+            compile: function(elem, attrs, $transclude) {
 
-                if(!$scope.type) {
-                    $scope.type = 'info';
-                }
+            	return function ($scope, attrs, element) {
 
-                var icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
-                $scope.icon = icons[$scope.type];
-            }
+	                if(!$scope.type) {
+	                    $scope.type = 'info';
+	                }
+
+	                $transclude($scope, function(clone) {
+	                	var html = angular.element(clone).html();
+	                	if(html) {
+	                		$scope.message = $interpolate(html)($scope.$parent);
+	                	}
+              		});
+
+	                var icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
+	                $scope.icon = icons[$scope.type];
+	            }
+	        }
         };
     });
 })();
