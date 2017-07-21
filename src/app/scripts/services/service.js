@@ -94,7 +94,7 @@
                             ].join(''),
                             clickOutsideToClose: true,
                             preserveScope: true,
-                            skipHide: true,
+                            multiple: true,
                             controller: ['$scope','$sce',function($scope,$sce) {
 
                                 $scope.content = $sce.trustAsHtml(message);
